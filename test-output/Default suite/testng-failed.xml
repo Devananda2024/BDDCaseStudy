@@ -6,7 +6,7 @@
       <class name="runners.BDDCaseStudy">
         <methods>
           <include name="setUpClass"/>
-          <include name="runScenario" invocation-numbers="1 7"/>
+          <include name="runScenario" invocation-numbers="0"/>
           <include name="tearDownClass"/>
         </methods>
       </class> <!-- runners.BDDCaseStudy -->

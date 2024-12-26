@@ -1,5 +1,8 @@
 package StepDefs;
 
+import java.util.List;
+import java.util.Map;
+
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
@@ -82,14 +85,17 @@ public class ArticlePosting {
 
 	}
 
-	@When("User enters Article details {string}, {string}, {string} and {string}")
-	public void user_enters_article_details(String title, String Desc, String Content, String Tags) throws InterruptedException {
-		//driver.findElement(By.xpath("//a[@class = 'nav-link ']")).click();
-		driver.findElement(By.xpath("//input[@name= 'title']")).sendKeys(title);
-		driver.findElement(By.xpath("//input[@name= 'description']")).sendKeys(Desc);
-		driver.findElement(By.xpath("//textarea[@name= 'body']")).sendKeys(Content);
-		
-		driver.findElement(By.xpath("//input[@name = 'tags']")).sendKeys(Tags);
+	@When("User enters Article details")
+	public void user_enters_article_details(io.cucumber.datatable.DataTable datatable) {
+		List<Map<String, String>> data = datatable.asMaps();
+		 String arttitle = data.get(0).get("title");
+		 String artdesc = data.get(0).get("Desc");
+		 String artbody = data.get(0).get("Content");
+		 String arttags = data.get(0).get("tag");
+		driver.findElement(By.xpath("//input[@name= 'title']")).sendKeys(arttitle);
+		driver.findElement(By.xpath("//input[@name= 'description']")).sendKeys(artdesc);
+		driver.findElement(By.xpath("//textarea[@name= 'body']")).sendKeys(artbody);
+		driver.findElement(By.xpath("//input[@name = 'tags']")).sendKeys(arttags);
 		driver.findElement(By.xpath("//button[@class = 'btn btn-lg pull-xs-right btn-primary']")).click();
 	}
 	@Then("Article must be created")
